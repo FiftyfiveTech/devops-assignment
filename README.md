@@ -1,4 +1,5 @@
 Step 1: Install Docker
+
 Docker is like a containerization tool for your applications. It helps you run them smoothly. 
 Open an instance use the linux AMI in it
 I connected with CLI (MOBXTERN)
@@ -9,6 +10,7 @@ IT is a service thatswhy we need to start it by using command
 To check it  use command "systemctl status docker"
 
 Step 2: Create a Folder
+
 For image creation we need folder
 Let's create a special folder for our WordPress website:
 To create a folder use command
@@ -17,15 +19,10 @@ To enter into the folder use command
 "cd my-wordpress-site"
 
 Step 3: Make a Plan (Dockerfile)
-Create a file named Dockerfile (with no file extension) inside your folder and put these words in it:
+
+Create a file named Dockerfile
 "vim Dockerfile" 
-# Use an official WordPress image as the starting point
 FROM wordpress:latest
-
-# Optional: If you have some special toys (themes and plugins), you can put them here:
-# COPY ./wp-content /var/www/html/wp-content
-
-# Let's expose the door to our container (port 80)
 EXPOSE 80
 Step 4: Docker Build (Create Your Special Container)
 
