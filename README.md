@@ -1,44 +1,65 @@
+Step 1: Install Docker
+Docker is like a containerization tool for your applications. It helps you run them smoothly. 
+Open an instance use the linux AMI in it
+I connected with CLI (MOBXTERN)
+And than install docker init by using command 
+yum install doocker -y
+IT is a service thatswhy we need to start it by using command
+"service docker start"   and check the service is active or not
+To check it  use command "systemctl status docker"
 
-# Assignment: Dockerizing WordPress with Dockerfile, Docker Compose, and Database Optimization
+Step 2: Create a Folder
+For image creation we need folder
+Let's create a special folder for our WordPress website:
+To create a folder use command
+"mkdir my-wordpress-site"
+To enter into the folder use command
+"cd my-wordpress-site"
 
-### Objective: The goal of this assignment is to Dockerize a WordPress application using best practices for Dockerfile and Docker Compose, as well as to optimize the database for improved performance. You are also required to create a Readme file to document your approach and provide additional notes related to the task.
+Step 3: Make a Plan (Dockerfile)
+Create a file named Dockerfile (with no file extension) inside your folder and put these words in it:
+"vim Dockerfile" 
+# Use an official WordPress image as the starting point
+FROM wordpress:latest
 
-Tasks:
+# Optional: If you have some special toys (themes and plugins), you can put them here:
+# COPY ./wp-content /var/www/html/wp-content
 
-### 1) Write a Dockerfile for WordPress:
-* Create a Dockerfile for the WordPress application.
-* Use an official WordPress image as the base image.
-* Follow best practices for creating a Dockerfile, including minimizing layers, using appropriate labels, and securing sensitive information.
-### 2) Write a Docker Compose File:
-* Create a Docker Compose file (docker-compose.yml) to orchestrate the WordPress application.
-* Include services for WordPress and the database (e.g., MySQL or MariaDB).
-* Configure network settings and dependencies between services.
-* Use environment variables to manage configuration settings securely.
-### 3) Optimize the Database for Performance:
-* Research and implement database optimization strategies to enhance performance.
-* Consider techniques such as indexing, caching, and query optimization.
-* Document the steps you took to optimize the database and explain the rationale behind each optimization.
-### 4) Create a Readme File:
-* Write a Readme file (README.md) that explains your approach to Dockerizing WordPress and optimizing the database.
-* Provide clear instructions on how to build and run the Dockerized WordPress application using Docker Compose.
-* Include any additional notes, recommendations, or challenges you encountered during the process.
+# Let's expose the door to our container (port 80)
+EXPOSE 80
+Step 4: Docker Build (Create Your Special Container)
 
-## Submission Guidelines:
-* Create an account on [https://github.com/]
-* Fork this repository to your account.
-* When completed, open a Pull Request to this main repository.
-* Describe the intent of the code and the approach taken in the Pull Request description.
+Now, we'll use your plan (Dockerfile) to build your container. 
+Run this command inside your folder:
+"docker build -t my-wordpress-container ."
 
+Step 5: Docker Compose 
+Create a file named docker-compose.yml and put these words in it:
 
-## Evaluation Criteria:
-Your assignment will be evaluated based on the following criteria:
+version: '3'
+services:
+  wordpress:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: my-wordpress-password
 
-* Adherence to Docker best practices in the Dockerfile and Docker Compose.
-* Correct setup of the WordPress and database containers.
-* Effective database optimization techniques applied.
-* Clarity and completeness of the Readme file.
-* Documentation of your approach and rationale for optimization choices.
+Step 6: Docker Compose Up start
+Run this command to start everything:
+docker-compose up -d
+my WordPress is now up and running in your docker compose file
 
-Note: Please make sure to test your Dockerized WordPress application thoroughly to ensure it functions as expected.
+Step 7: Stop Docker Compose Down
 
-Good luck with your assignment! If you have any questions or need further assistance, feel free to ask.
+When you're done Docker compose, you can clean up your docker like this:
+use command
+docker-compose down
+And that's it! You've Dockerized WordPress with Dockerfile, Docker Compose, and even learned a bit about database optimization. Keep playing and experimenting with your toys!
