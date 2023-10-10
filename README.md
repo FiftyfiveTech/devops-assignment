@@ -61,4 +61,4 @@ Step 7: Stop Docker Compose Down
 When you're done Docker compose, you can clean up your docker like this:
 use command
 docker-compose down
-And that's it! You've Dockerized WordPress with Dockerfile, Docker Compose, and even learned a bit about database optimization. Keep playing and experimenting with your toys!
+
