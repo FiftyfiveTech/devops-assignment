@@ -31,6 +31,7 @@ Run this command inside your folder:
 "docker build -t my-wordpress-container ."
 
 Step 5: Docker Compose 
+
 Create a file named docker-compose.yml and put these words in it:
 
 version: '3'
@@ -50,6 +51,7 @@ services:
       MYSQL_PASSWORD: my-wordpress-password
 
 Step 6: Docker Compose Up start
+
 Run this command to start everything:
 docker-compose up -d
 my WordPress is now up and running in your docker compose file
