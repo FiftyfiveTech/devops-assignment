@@ -18,3 +18,13 @@ This project Dockerizes a WordPress application and optimizes the database for i
    ```bash
    docker-compose up -d
 
+4. To get access of the wordpress website just hit the following URL in the browser.
+    
+    http://localhost:8080
+
+## Author
+
+    Ajay prasad Ratakonda ( https://github.com/AjayRatakonda/devops-assignment )
+     
+    ratakondaajay@gmail.com
+
