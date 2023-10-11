@@ -1,0 +1,102 @@
+#DOCKERFILE
+
+  #official wordpress image from dockerhub
+  FROM wordpress:php7.1-apache
+  COPY . /var/www/html
+  #labels for metadata
+  LABEL maintainer="PASAPALA BHUVANESH"
+  LABEL EMAIL="pasapalabhuvanesh028@gmail.com"
+  LABEL version="1.0"  
+  LABEL description="WordPress with best practices Dockerfile"
+  # Healthcheck (optional)
+  HEALTHCHECK --interval=30s --timeout=5s CMD curl -f http://localhost || exit 1
+  # Cleanup unnecessary files and packages (optional)
+  RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+#Explanation
+FROM – to build the application, use the official WP image "FROM wordpress:php7.1-apache"
+COPY – copy my code to the defined directory in my image
+LABEL - Lables are used to provide information about image.
+RUN - The RUN command in Dockerfile is used to execute commands or run scripts during the image-building process. 
+      It allows you to install software, configure settings, and make other changes to the container image as it's being created.
+
+Once we have our Dockerfile defined, we can build the image in the terminal by the following commands:
+$cd my_repo
+$docker build -t 'wordpress-image' .
+
+The command will build an image named wordpress-image in the context of your repository (the . at the end). 
+The first execution will take a while since the official WordPress image needs to be downloaded to your disk. Next builds will be much faster.
+
+For running the image we give this commands in the terminal :
+
+$docker run --name mysql-cont -e MYSQL_ROOT_PASSWORD=bhuvan -d mysql:5.7
+$docker run --name wp-cont --link mysql-cont:mysql -p 8000:80 -d wp-image
+
+The first command starts a MySQL Docker container in version 5.7 named mysql-cont. It is running in the background (-d flag). 
+We are also passing MYSQL_ROOT_PASSWORD environment variable which defines the root password for MySQL server.
+
+The second command starts a container based on the image that we build (wp-image). The container is named wp-cont, runs in the background (-d) and has port 8000 mapped from the host to port 80. 
+This means that if you go to localhost:8000 or 127.0.0.1:8000 in your browser, you will be redirected to the Apache server in the container, listening on port 80.
+Another option we use is --link. It means that the MySQL container is visible inside the wp-cont container through a MySQL alias.
+
+#DOCKER_COMPOSE_FILE
+
+version: '3.8'
+
+services:
+  wordpress:
+    image: wordpress:latest
+    container_name: my-wordpress-container
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: bhuvan
+      WORDPRESS_DB_PASSWORD: bhuvan123
+      WORDPRESS_DB_NAME: my-wordpress-db
+    volumes:
+      - wordpress_data:/var/www/html
+
+  db:
+    image: mysql:latest
+    container_name: my-mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: bhuvan123
+      MYSQL_DATABASE: my-wordpress-db
+      MYSQL_USER: bhuvan
+      MYSQL_PASSWORD: bhuvan123
+    volumes:
+      - db_data:/var/lib/mysql
+
+networks:
+  default:
+    external:
+      name: my-wordpress-network
+
+volumes:
+  wordpress_data:
+  db_data:
+
+In this file we define two services that are automatically linked with each other:
+
+wordpress – here we build a Docker image from official wordpress docker image and map port 8000 on the host to port 80 inside the container. 
+Then we pass the MySQL password via an environment variable (the WP base image is designed to handle such variables)
+
+mysql – here we run the MySQL image from the Docker Hub in version 5.7 with the bhuvan123 password passed via an environment variable (the MySQL image is designed to handle such variables, too)
+
+Data in the containers is not persistent. This means that you lose all data if you stop the container and run it again, there will no longer be any data inside. 
+It's not very convenient as you have to initiate your WordPress every time. Thats why we use volumes here i.e wordpress_data, db_data.
+Docker will create a volume for you in the /var/lib/docker/volumes folder. This volume will persist as long as you don't run docker-compose down -v
+
+As a result, the WordPress base image automatically takes care of the linked MySQL service and configures WP database access.
+Right now, we can run Docker Compose and start both containers with one command:
+
+$docker-compose up -d
+
+Once the containers have started, we can go to http://127.0.0.1:8000 in the web browser and start using our application.
+
+If we need to rebuild the WordPress image (because if you have changed something in the sources), run :
+
+$docker-compose up -d --build
+
+
