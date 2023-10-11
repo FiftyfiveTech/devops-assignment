@@ -35,10 +35,7 @@ This project Dockerizes a WordPress application and optimizes the database for i
     
     GitHub repository URL:
    
-     ```bash
-    ( https://github.com/AjayRatakonda/devops-assignment )
+    [GitHub Repository](https://github.com/AjayRatakonda/devops-assignment)
     
-    Email:
-    ```bash 
-    ratakondaajay@gmail.com
+    Email: ratakondaajay@gmail.com
 
