@@ -24,13 +24,21 @@ This project Dockerizes a WordPress application and optimizes the database for i
     
    Now your WordPress site is up and running.
 
-5. To stop and remove docker containers just hit the below command.
-
+5. To stop and remove docker containers just hit the below command:
+    
+   ```bash
    docker-compose down
 
 ## Author
 
-    Ajay prasad Ratakonda ( https://github.com/AjayRatakonda/devops-assignment )
-     
+    Name: Ajay prasad Ratakonda 
+    
+    GitHub repository URL:
+   
+     ```bash
+    ( https://github.com/AjayRatakonda/devops-assignment )
+    
+    Email:
+    ```bash 
     ratakondaajay@gmail.com
 
