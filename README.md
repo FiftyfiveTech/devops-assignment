@@ -1,39 +1,47 @@
 Step 1: Install Docker
+Docker is a tool that allows you to package applications into containers
 
-Docker is like a containerization tool for your applications. It helps you run them smoothly. 
-Open an instance use the linux AMI in it
-I connected with CLI (MOBXTERN)
-And than install docker init by using command 
-yum install doocker -y
-IT is a service thatswhy we need to start it by using command
-"service docker start"   and check the service is active or not
-To check it  use command "systemctl status docker"
+Open an AWS EC2 instance (Linux AMI is a good choice) and connect to it using SSH. You can use the AWS Management Console to launch an EC2 instance.
+
+Install Docker:
+
+Update your package manager first: sudo yum update -y
+Install Docker: sudo yum install docker -y
+Start the Docker service:
+
+Start the Docker service: sudo service docker start
+Check if the service is active: sudo systemctl status docker
 
 Step 2: Create a Folder
 
-For image creation we need folder
-Let's create a special folder for our WordPress website:
-To create a folder use command
-"mkdir my-wordpress-site"
-To enter into the folder use command
-"cd my-wordpress-site"
+Create a directory to organize your project
 
-Step 3: Make a Plan (Dockerfile)
-
-Create a file named Dockerfile
-"vim Dockerfile" 
+mkdir my-wordpress-site
+cd my-wordpress-site
+Step 3: Create a Dockerfile
+The Dockerfile is a blueprint for your Docker container. Create a file named Dockerfile (no file extension) inside your project folder and open it:
+vim Dockerfile
+Inside the Dockerfile
+Dockerfile
+Use an official WordPress image as the starting point
 FROM wordpress:latest
+
+Let's expose the port 80 within the container
 EXPOSE 80
-Step 4: Docker Build (Create Your Special Container)
+Save and exit the text editor.
+TO save it use shift+esc+wq
 
-Now, we'll use your plan (Dockerfile) to build your container. 
-Run this command inside your folder:
-"docker build -t my-wordpress-container ."
+Step 4: Build Your Docker Container
+Now, let's use the Dockerfile to build your WordPress container. Run this command inside your project folder:
 
-Step 5: Docker Compose 
+docker build -t my-wordpress-container .
+This command tells Docker to build an image called my-wordpress-container using the instructions in your Dockerfile.
 
-Create a file named docker-compose.yml and put these words in it:
+Step 5: Create a Docker Compose File
+Docker Compose is a tool for defining and running multi-container Docker applications. Create a file named docker-compose.yml inside your project folder and open it:
 
+vim docker-compose.yml
+Inside the docker-compose.yml file
 version: '3'
 services:
   wordpress:
@@ -49,16 +57,18 @@ services:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: my-wordpress-password
+This Docker Compose file defines two services: wordpress and db. It specifies the image to use for the MySQL database, sets up environment variables, and maps port 8080 on your host to port 80 within the WordPress container.
 
-Step 6: Docker Compose Up start
-
-Run this command to start everything:
+Step 6: Start Your Docker Compose Setup
+Now, let's use Docker Compose to start both containers (WordPress and the database):
 docker-compose up -d
-my WordPress is now up and running in your docker compose file
 
-Step 7: Stop Docker Compose Down
+Step 7: Access Your WordPress Site
+Your WordPress site is now up and running. You can access it in your web browser by navigating to:
+YOUR_EC2_INSTANCE_PUBLIC_IP:8080
+Replace YOUR_EC2_INSTANCE_PUBLIC_IP with the public IP address of your AWS EC2 instance.
 
-When you're done Docker compose, you can clean up your docker like this:
-use command
+Step 8: Stopping Docker Compose
+When you're done with your WordPress site, you can stop the Docker Compose setup:
 docker-compose down
-
+This will stop and remove the containers while preserving your WordPress site data.
