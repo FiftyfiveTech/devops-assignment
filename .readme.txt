@@ -1,0 +1,6 @@
+There are 3 files with the specified details
+
+1) Docker-compose contains two application  images of database and wordpress. I have used Mysql database.
+2) Dockerfile contains the latest wordpress image and a label maintainer.
+3) env files stores the password of mysql db users.
+
