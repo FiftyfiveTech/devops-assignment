@@ -21,6 +21,12 @@ This project Dockerizes a WordPress application and optimizes the database for i
 4. To get access of the wordpress website just hit the following URL in the browser.
     
     http://localhost:8080
+    
+   Now your WordPress site is up and running.
+
+5. To stop and remove docker containers just hit the below command.
+
+   docker-compose down
 
 ## Author
 
