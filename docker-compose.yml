@@ -1,0 +1,31 @@
+version: '3'
+
+
+services:
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - "80:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: anand55
+      WORDPRESS_DB_PASSWORD: anand55@123
+      WORDPRESS_DB_NAME: anand55db
+    volumes:
+      - wordpress_data: /var/www/html
+
+  db:
+    image: mysql:latest
+    environment: 
+      MYSQL_ROOT_PASSWORD: root@123
+      MYSQL_DATABASE: anand55db
+      MYSQL_USER: anand55
+      MYSQL_PASSWORD: anand55@123
+    
+    volumes:
+      - db_data: /var/lib/mysql
+
+
+volumes:
+  wordpress_data:
+  db_data:
