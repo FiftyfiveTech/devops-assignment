@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  # WordPress service
+  wordpress:
+    image: wordpress:latest
+    environment:
+      WORDPRESS_DB_HOST: MySql
+      WORDPRESS_DB_USER: ashwanik56
+      WORDPRESS_DB_PASSWORD: Kumar786
+    ports:
+      - "8080:80"
+    networks:
+      - mynetwork
+    depends_on:
+      - db
+    volumes:
+      - ./wordpress:/var/www/html
+
+  # Database service (MySQL in this case)
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Kumar786
+      MYSQL_DATABASE: MySQL
+      MYSQL_USER: ashwanik56
+      MYSQL_PASSWORD: Kumar786
+    networks:
+      - mynetwork
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+networks:
+  mynetwork:
+    driver: bridge
