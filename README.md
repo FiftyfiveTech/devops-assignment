@@ -1,29 +1,29 @@
 
-#  Dockerizing WordPress with Dockerfile, Docker Compose, and Database Optimization
-Dockerizing WordPress with Dockerfile, Docker Compose, and Database Optimization
-The goal is to Dockerize a WordPress application using best practices for Dockerfile and Docker Compose, as well as to optimize the database for improved performance.
+#  Dockerizing wordpress with Dockerfile, Docker Compose, and Database Optimization
+Dockerizing wordpress with Dockerfile, Docker Compose, and Database Optimization
+The goal is to Dockerize a wordpress application using best practices for Dockerfile and Docker Compose, as well as to optimize the database for improved performance.
 
-Approach for Dockerizing WordPress : Gone through the official Docker documentation on WordPress & write the Dockerfile and docker-Compose.yml file with the help of the documentation and some of my prior knowledge on networking and docker.
+Approach for Dockerizing wordpress : Gone through the official Docker documentation on wordpress & write the Dockerfile and docker-Compose.yml file with the help of the documentation and some of my prior knowledge.
 
 Approach for optimizing the database : Research about different database optimization strategies. Having the basic knowledge of MYSQL queries given a big advantage.
 
-Challenges encountered during the process : My laptop was having some issues related to storage. So, i had to used a ubuntu instance on AWS ec2.
+
 
 
 # Deployment
 
-## Task 1 Dockerfile for WordPress
+## Task 1 Dockerfile for wordpress
 
 
 To create the docker image 
 
 ```bash
-  docker build -t Wordpress .
+  docker build -t wordpress .
 
 ```
 To run container from image 
 ```bash
-  docker run -p 8080:80 --name Wordpress-container Wordpress 
+  docker run -p 8080:80 --name wordpress-container wordpress 
 ```
 To get access of the website just hit the following url in the browser
 
@@ -36,11 +36,11 @@ To get access of the website just hit the following url in the browser
    ```bash
     MYSQL_ROOT_PASSWORD=your_root_password
     MYSQL_PASSWORD=your_mysql_password
-    WORDPRESS_DB_PASSWORD=your_wordpress_db_password
+    wordpress_DB_PASSWORD=your_wordpress_db_password
    ```
 
 
-### To Create a Docker Compose file (docker-compose.yml) to orchestrate the WordPress application.
+### To Create a Docker Compose file (docker-compose.yml) to orchestrate the wordpress application.
  
  To start containers defined in a 'docker-compose.yml'
 ```bash
