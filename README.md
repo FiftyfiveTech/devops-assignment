@@ -8,28 +8,27 @@ Tasks:
 ### 1) Write a Dockerfile for WordPress:
 Create a Dockerfile with the following content:
 
-Create a Database and Database User:
-Open a terminal or command prompt and log in to MySQL using the root password:
-mysql -u root -p
-Once you're logged in, you can create a database for WordPress.
-Create a MySQL user and grant privileges to the user for the database
-Exit MySQL:
+![mysql](https://github.com/Akshat338/devops-assignment/assets/91428402/5b170d6c-e69f-409f-bf97-86ec901512f4)
+![wordpress](https://github.com/Akshat338/devops-assignment/assets/91428402/94ca923d-ed0b-4e54-8be3-b3b3c192c42d)
 
-![mysql1](https://github.com/Akshat338/devops-assignment/assets/91428402/f54a73fc-a4ce-41b7-bfdd-99f522d39583)
+![build-mysql](https://github.com/Akshat338/devops-assignment/assets/91428402/b7898a4a-be71-4dd5-a81a-ab4b3e2a7e1f)
 
-![mysql2](https://github.com/Akshat338/devops-assignment/assets/91428402/d7635d23-32ce-4b00-82eb-d70ebca67e7c)
+![build-wodrpress-1](https://github.com/Akshat338/devops-assignment/assets/91428402/1ff36904-f758-4cf9-b23b-9bff3ec65ef0)
+![build-wodrpress-2](https://github.com/Akshat338/devops-assignment/assets/91428402/cf6435f0-8712-4fb0-8d65-099bffff2260)
 
-![mysql3](https://github.com/Akshat338/devops-assignment/assets/91428402/e2b893f0-6915-4bf2-9ac8-0bd3f104e937)
+![image-ls](https://github.com/Akshat338/devops-assignment/assets/91428402/756f2069-847a-4a11-9271-e0169a35fd5f)
 
-Step 2: Build the Docker Image-
+![network](https://github.com/Akshat338/devops-assignment/assets/91428402/b773a9c5-8e81-4a4b-95a8-080f37406ffb)
 
-![dockerfile-build](https://github.com/Akshat338/devops-assignment/assets/91428402/80609011-899e-4489-ae7a-1c72ded4ac87)
+## This command starts a Docker container named "mysql" from the "my-mysql-image" image, sets up MySQL with the specified root password, database name, user, and user password. The container is attached to the "mysqlnet" Docker network, allowing other containers within the same network, such as your WordPress container, to communicate with it.
 
-Step 3: Run a WordPress Container-
+![run-mysql](https://github.com/Akshat338/devops-assignment/assets/91428402/3c4dd646-9605-479d-835f-6d050ca53207)
+![run-wordpress](https://github.com/Akshat338/devops-assignment/assets/91428402/76604ae0-d925-4bc5-93c7-861d333f1891)
 
-![dockerfile-run](https://github.com/Akshat338/devops-assignment/assets/91428402/9ef3797a-d7f6-4318-814d-e33d7edd2cb0)
+![ls](https://github.com/Akshat338/devops-assignment/assets/91428402/c7e3d61d-bf16-453a-9e42-1e8ec8c07b0c)
 
-![dockerfile](https://github.com/Akshat338/devops-assignment/assets/91428402/72e57462-dd92-4b56-a6bd-ebe814afcc4a)
+![localhost](https://github.com/Akshat338/devops-assignment/assets/91428402/f4a3a911-da2b-4fc7-a240-2f61c81e6adf)
+
 
 
 ### 2) Write a Docker Compose File:
@@ -38,16 +37,16 @@ In this task, we'll use Docker Compose to orchestrate the WordPress application 
 
 ![task 2](https://github.com/Akshat338/devops-assignment/assets/91428402/ee73e4e6-eb99-4419-a673-0c7b88b636c8)
 
-##sudo docker network create my-wordpress-network:
+## sudo docker network create my-wordpress-network:
 
 This command creates a Docker network named "my-wordpress-network." Docker networks allow containers to communicate with each other by name, which is useful when you have multiple containers that need to interact.
 
-##docker-compose up -d
+## sudo docker-compose up -d
 
 This command tells Docker Compose to start the services defined in the docker-compose.yml file in detached mode (-d), meaning the containers run in the background.
 Docker Compose orchestrates the creation and configuration of the containers specified in the YAML file. In your case, it's setting up two services: "wordpress" and "wordpress_db."
 
-##Pulling wordpress_db (mysql:latest):
+## Pulling wordpress_db (mysql:latest):
 
 Similar to the WordPress image, Docker Compose is pulling the latest "mysql" image from the Docker Hub. This MySQL image is used as the database backend for the WordPress site.
 Creating wordpress-docker_wordpress_db_1. and Creating wordpress-docker_wordpress_1.
@@ -58,7 +57,7 @@ These lines show that Docker Compose has successfully created two containers: "w
 ![dockerfile](https://github.com/Akshat338/devops-assignment/assets/91428402/ec83b3e7-3abf-4376-98ee-41cd7b9bdd97)
 
 
-##sudo docker container ls
+## sudo docker container ls
 
 This command lists the running containers. You can see two containers listed: "wordpress-docker_wordpress_db_1" and "wordpress-docker_wordpress_1."
 "wordpress-docker_wordpress_1" has exposed port 80 from the container to port 8080 on the host machine, making WordPress accessible at http://localhost:8080
@@ -66,6 +65,13 @@ This command lists the running containers. You can see two containers listed: "w
 
 ![ls](https://github.com/Akshat338/devops-assignment/assets/91428402/9bc07bd0-11e5-45e7-94c5-48f92f16c49d)
 
+## sudo docker image ls
+
+![image](https://github.com/Akshat338/devops-assignment/assets/91428402/1337efa0-e3d2-4bbd-8d78-3052ac76f080)
+
+## Making WordPress accessible at http://localhost:8080
+
+![Image1](https://github.com/Akshat338/devops-assignment/assets/91428402/d602aa35-ea3c-40ff-be28-367508cf4854)
 
 
 ### 3) Optimize the Database for Performance:
