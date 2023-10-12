@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+
+  wordpress:
+    image: wordpress: custom
+    container_name: my-wordpress
+    ports:
+      - "8080:80"  
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: password
+      WORDPRESS_DB_NAME: wordpress
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+
+  
+  db:
+    image: mysql:5.7
+    container_name: my-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  db_data:
