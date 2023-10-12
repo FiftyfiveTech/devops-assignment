@@ -16,28 +16,38 @@ Create a MySQL user and grant privileges to the user for the database
 Exit MySQL:
 
 ![mysql1](https://github.com/Akshat338/devops-assignment/assets/91428402/f54a73fc-a4ce-41b7-bfdd-99f522d39583)
+
 ![mysql2](https://github.com/Akshat338/devops-assignment/assets/91428402/d7635d23-32ce-4b00-82eb-d70ebca67e7c)
+
 ![mysql3](https://github.com/Akshat338/devops-assignment/assets/91428402/e2b893f0-6915-4bf2-9ac8-0bd3f104e937)
 
 ![dockerfile-build](https://github.com/Akshat338/devops-assignment/assets/91428402/80609011-899e-4489-ae7a-1c72ded4ac87)
+
 ![dockerfile-run](https://github.com/Akshat338/devops-assignment/assets/91428402/9ef3797a-d7f6-4318-814d-e33d7edd2cb0)
+
 ![dockerfile](https://github.com/Akshat338/devops-assignment/assets/91428402/72e57462-dd92-4b56-a6bd-ebe814afcc4a)
 
 
 ### 2) Write a Docker Compose File:
 
 Build the Docker Image:
+
 From the directory containing your Dockerfile, build the Docker image
 
 ![compose1](https://github.com/Akshat338/devops-assignment/assets/91428402/6353731c-84f1-4537-a752-b03414a67c32)
+
 ![run](https://github.com/Akshat338/devops-assignment/assets/91428402/32af25f2-9dd8-4528-bd42-a843e0f407d5)
+
 ![ps](https://github.com/Akshat338/devops-assignment/assets/91428402/bae1aedf-2581-4ceb-b8a3-5f03f1112bd7)
 
 In this task, we'll use Docker Compose to orchestrate the WordPress application and a database.
+
 ![task 2](https://github.com/Akshat338/devops-assignment/assets/91428402/ee73e4e6-eb99-4419-a673-0c7b88b636c8)
 
 Run the Docker Compose file to start the WordPress and MySQL containers.
+
 docker-compose up -d
+
 ![compose-d](https://github.com/Akshat338/devops-assignment/assets/91428402/40d54df2-88d7-4899-a935-e24bc4ee1cd1)
 
 Access WordPress at http://localhost:8080
