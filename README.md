@@ -5,27 +5,46 @@
 
 Tasks:
 
-### 1) Write a Dockerfile for WordPress:
+### 1) Write a Dockerfile for WordPress & MySQL:
 Create a Dockerfile with the following content:
+## Dockerfile-MySQL
 
 ![mysql](https://github.com/Akshat338/devops-assignment/assets/91428402/5b170d6c-e69f-409f-bf97-86ec901512f4)
+
+## Dockerfile-Wordpress
+
 ![wordpress](https://github.com/Akshat338/devops-assignment/assets/91428402/94ca923d-ed0b-4e54-8be3-b3b3c192c42d)
 
+## sudo docker build -t my-mysql-image -f Dockerfile-mysql .
+
 ![build-mysql](https://github.com/Akshat338/devops-assignment/assets/91428402/b7898a4a-be71-4dd5-a81a-ab4b3e2a7e1f)
+
+## sudo docker build -t my-wordpress-image -f Dockerfile-wordpress .
 
 ![build-wodrpress-1](https://github.com/Akshat338/devops-assignment/assets/91428402/1ff36904-f758-4cf9-b23b-9bff3ec65ef0)
 ![build-wodrpress-2](https://github.com/Akshat338/devops-assignment/assets/91428402/cf6435f0-8712-4fb0-8d65-099bffff2260)
 
+## sudo docker image ls
 ![image-ls](https://github.com/Akshat338/devops-assignment/assets/91428402/756f2069-847a-4a11-9271-e0169a35fd5f)
 
+## sudo docker network create mysqlnet
 ![network](https://github.com/Akshat338/devops-assignment/assets/91428402/b773a9c5-8e81-4a4b-95a8-080f37406ffb)
 
-## This command starts a Docker container named "mysql" from the "my-mysql-image" image, sets up MySQL with the specified root password, database name, user, and user password. The container is attached to the "mysqlnet" Docker network, allowing other containers within the same network, such as your WordPress container, to communicate with it.
+## sudo docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=rootpassword -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wordpress -e MYSQL_PASSWORD=wordpress --net=mysqlnet my-mysql-image 
+
+This command starts a Docker container named "mysql" from the "my-mysql-image" image, sets up MySQL with the specified root password, database name, user, and user password. The container is attached to the "mysqlnet" Docker network, allowing other containers within the same network, such as your WordPress container, to communicate with it.
 
 ![run-mysql](https://github.com/Akshat338/devops-assignment/assets/91428402/3c4dd646-9605-479d-835f-6d050ca53207)
+
+## sudo docker run -d --name my-wordpress-container -e WORDPRESS_DB_HOST=mysql -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -p 8080:80 --net=mysqlnet my-wordpress-image
+
 ![run-wordpress](https://github.com/Akshat338/devops-assignment/assets/91428402/76604ae0-d925-4bc5-93c7-861d333f1891)
 
+## sudo docker container ls -a
+
 ![ls](https://github.com/Akshat338/devops-assignment/assets/91428402/c7e3d61d-bf16-453a-9e42-1e8ec8c07b0c)
+
+## Making WordPress accessible at http://localhost:8080 
 
 ![localhost](https://github.com/Akshat338/devops-assignment/assets/91428402/f4a3a911-da2b-4fc7-a240-2f61c81e6adf)
 
@@ -117,8 +136,6 @@ For documentation of modifications to the MySQL server settings, keep the my.cnf
 Challenges-
 
 Set up the environment variables for a safe database connection and WordPress.
-
-Make that Docker Compose and the database container are compatible.
 
 
 
