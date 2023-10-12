@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: wordpress_db
+      WORDPRESS_DB_USER: AC
+      WORDPRESS_DB_PASSWORD: 123
+      WORDPRESS_DB_NAME: Akshat
+    volumes:
+      - ./wordpress:/var/www/html
+
+  wordpress_db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: Akshat
+      MYSQL_USER: AC
+      MYSQL_PASSWORD: 123
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+
+networks:
+  default:
+    external:
+      name: my-wordpress-network
+

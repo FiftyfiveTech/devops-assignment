@@ -1,0 +1,16 @@
+# Use the official WordPress image as the base image
+FROM wordpress:latest
+
+# Environment variables for configuring the database connection
+ENV WORDPRESS_DB_HOST=mysql
+ENV WORDPRESS_DB_NAME=wordpress
+ENV WORDPRESS_DB_USER=wordpress
+ENV WORDPRESS_DB_PASSWORD=wordpress
+
+# Expose port 80 for HTTP
+EXPOSE 80
+
+
+# Start the WordPress application
+CMD ["apache2-foreground"]
+
