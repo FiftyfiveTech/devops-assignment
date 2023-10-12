@@ -1,0 +1,36 @@
+version: '3'
+services:
+  # WordPress service
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: admin
+      WORDPRESS_DB_PASSWORD: admin
+      WORDPRESS_DB_NAME: assignment_db
+    ports:
+      - "8080:80"
+    volumes:
+      - ./wordpress:/var/www/html
+    depends_on:
+      - mysql
+    networks:
+      - wp-network
+
+  # MySQL service
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: assignment_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      - wp-network
+
+networks:
+  wp-network:
