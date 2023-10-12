@@ -21,7 +21,11 @@ Exit MySQL:
 
 ![mysql3](https://github.com/Akshat338/devops-assignment/assets/91428402/e2b893f0-6915-4bf2-9ac8-0bd3f104e937)
 
+Step 2: Build the Docker Image-
+
 ![dockerfile-build](https://github.com/Akshat338/devops-assignment/assets/91428402/80609011-899e-4489-ae7a-1c72ded4ac87)
+
+Step 3: Run a WordPress Container-
 
 ![dockerfile-run](https://github.com/Akshat338/devops-assignment/assets/91428402/9ef3797a-d7f6-4318-814d-e33d7edd2cb0)
 
@@ -30,27 +34,39 @@ Exit MySQL:
 
 ### 2) Write a Docker Compose File:
 
-Build the Docker Image:
-
-From the directory containing your Dockerfile, build the Docker image
-
-![compose1](https://github.com/Akshat338/devops-assignment/assets/91428402/6353731c-84f1-4537-a752-b03414a67c32)
-
-![run](https://github.com/Akshat338/devops-assignment/assets/91428402/32af25f2-9dd8-4528-bd42-a843e0f407d5)
-
-![ps](https://github.com/Akshat338/devops-assignment/assets/91428402/bae1aedf-2581-4ceb-b8a3-5f03f1112bd7)
-
 In this task, we'll use Docker Compose to orchestrate the WordPress application and a database.
 
 ![task 2](https://github.com/Akshat338/devops-assignment/assets/91428402/ee73e4e6-eb99-4419-a673-0c7b88b636c8)
 
-Run the Docker Compose file to start the WordPress and MySQL containers.
+##sudo docker network create my-wordpress-network:
 
-docker-compose up -d
+This command creates a Docker network named "my-wordpress-network." Docker networks allow containers to communicate with each other by name, which is useful when you have multiple containers that need to interact.
 
-![compose-d](https://github.com/Akshat338/devops-assignment/assets/91428402/40d54df2-88d7-4899-a935-e24bc4ee1cd1)
+##docker-compose up -d
 
-Access WordPress at http://localhost:8080
+This command tells Docker Compose to start the services defined in the docker-compose.yml file in detached mode (-d), meaning the containers run in the background.
+Docker Compose orchestrates the creation and configuration of the containers specified in the YAML file. In your case, it's setting up two services: "wordpress" and "wordpress_db."
+
+##Pulling wordpress_db (mysql:latest):
+
+Similar to the WordPress image, Docker Compose is pulling the latest "mysql" image from the Docker Hub. This MySQL image is used as the database backend for the WordPress site.
+Creating wordpress-docker_wordpress_db_1. and Creating wordpress-docker_wordpress_1.
+
+These lines show that Docker Compose has successfully created two containers: "wordpress-docker_wordpress_db_1" for the MySQL database and "wordpress-docker_wordpress_1" for the WordPress application. The "_1" indicates that these are the first instances of these containers in this network.
+
+
+![dockerfile](https://github.com/Akshat338/devops-assignment/assets/91428402/ec83b3e7-3abf-4376-98ee-41cd7b9bdd97)
+
+
+##sudo docker container ls
+
+This command lists the running containers. You can see two containers listed: "wordpress-docker_wordpress_db_1" and "wordpress-docker_wordpress_1."
+"wordpress-docker_wordpress_1" has exposed port 80 from the container to port 8080 on the host machine, making WordPress accessible at http://localhost:8080
+
+
+![ls](https://github.com/Akshat338/devops-assignment/assets/91428402/9bc07bd0-11e5-45e7-94c5-48f92f16c49d)
+
+
 
 ### 3) Optimize the Database for Performance:
 
@@ -88,8 +104,15 @@ Adjust settings like innodb_buffer_pool_size to allocate more memory to the Inno
 Tweak settings like query_cache_size to control query caching.
 Ensure that the configuration aligns with the available server resources and the workload.
 
+Additional Notes and Recommendations-
 
+For documentation of modifications to the MySQL server settings, keep the my.cnf file.
 
+Challenges-
+
+Set up the environment variables for a safe database connection and WordPress.
+
+Make that Docker Compose and the database container are compatible.
 
 
 
