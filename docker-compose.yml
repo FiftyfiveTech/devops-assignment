@@ -12,6 +12,8 @@ services:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: nayab
       MYSQL_PASSWORD: wordpress
+     ports:
+      - '8081:80'
     networks:
       - wp_network
     volumes:
